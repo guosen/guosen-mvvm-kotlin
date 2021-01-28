@@ -5,10 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import java.io.IOException
 
-/**
- * Created by luyao
- * on 2019/4/10 9:41
- */
 open class BaseRepository {
 
     suspend fun <T : Any> apiCall(call: suspend () -> BaseResponse<T>): BaseResponse<T> {

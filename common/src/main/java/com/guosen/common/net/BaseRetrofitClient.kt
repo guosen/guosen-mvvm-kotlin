@@ -7,10 +7,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by luyao
- * on 2018/3/13 14:58
- */
 abstract class BaseRetrofitClient {
 
     companion object {

@@ -3,11 +3,14 @@ package com.guosen.mvvm
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.guosen.common.base.BaseVMActivity
 import com.guosen.common.event.EventMessage
 import com.guosen.common.imageloader.ImageLoaderHelper
 import com.guosen.common.imageloader.ImageOptions
 import org.greenrobot.eventbus.EventBus
+
 
 class MainActivity() : BaseVMActivity<MyViewModel>() {
 
@@ -37,6 +40,9 @@ class MainActivity() : BaseVMActivity<MyViewModel>() {
     }
 
     fun eventTest(view:View){
+        ARouter.getInstance().build("/app/nextdd")
+                .navigation()
+
         EventBus.getDefault().post(EventMessage("11","qq",1,2,null))
 
     }

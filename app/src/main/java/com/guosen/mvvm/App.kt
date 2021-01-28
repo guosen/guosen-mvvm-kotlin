@@ -2,6 +2,7 @@ package com.guosen.mvvm
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.guosen.common.imageloader.ImageLoaderHelper
 import kotlin.properties.Delegates
 
@@ -25,8 +26,9 @@ class App : Application() {
         super.onCreate()
         CONTEXT = applicationContext
         ImageLoaderHelper.getInstance().init(this)
-
-
+        ARouter.openLog()
+        ARouter.openDebug()
+        ARouter.init(this);
 
         //x5内核初始化接口
 //        QbSdk.initX5Environment(applicationContext, object : QbSdk.PreInitCallback {

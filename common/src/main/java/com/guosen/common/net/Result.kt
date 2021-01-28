@@ -1,9 +1,5 @@
 package com.guosen.common.net
 
-/**
- * Created by luyao
- * on 2019/10/12 11:08
- */
 sealed class Result<out T : Any> {
 
     data class Success<out T : Any>(val data: T) : Result<T>()
