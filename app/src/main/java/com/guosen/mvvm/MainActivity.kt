@@ -40,7 +40,7 @@ class MainActivity() : BaseVMActivity<MyViewModel>() {
     }
 
     fun eventTest(view:View){
-        ARouter.getInstance().build("/app/nextdd")
+        ARouter.getInstance().build("/common/web")
                 .navigation()
 
         EventBus.getDefault().post(EventMessage("11","qq",1,2,null))

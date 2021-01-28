@@ -2,9 +2,13 @@ package com.guosen.mvvm
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guosen.common.imageloader.ImageLoaderHelper
+import com.tencent.smtt.export.external.TbsCoreSettings
+import com.tencent.smtt.sdk.QbSdk
 import kotlin.properties.Delegates
+
 
 /**
  * Created by luyao
@@ -29,7 +33,12 @@ class App : Application() {
         ARouter.openLog()
         ARouter.openDebug()
         ARouter.init(this);
-
+         // 在调用TBS初始化、创建WebView之前进行如下配置
+        // 在调用TBS初始化、创建WebView之前进行如下配置
+        val map = HashMap<String, Any>()
+        map[TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER] = true
+        map[TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE] = true
+        QbSdk.initTbsSettings(map)
         //x5内核初始化接口
 //        QbSdk.initX5Environment(applicationContext, object : QbSdk.PreInitCallback {
 //
