@@ -3,27 +3,32 @@ package com.guosen.common.net
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
+import retrofit2.HttpException
+import java.io.EOFException
 import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import javax.net.ssl.SSLException
 
 open class BaseRepository {
 
-    suspend fun <T : Any> apiCall(call: suspend () -> BaseResponse<T>): BaseResponse<T> {
+    suspend fun <T : Any> apiCall(call: suspend () -> BaseResponse<T>,errorMessage: String): BaseResponse<T> {
         return call.invoke()
     }
 
-    suspend fun <T : Any> safeApiCall(call: suspend () -> BaseResponse<T>, errorMessage: String): T? {
+    suspend fun <T : Any> safeApiCall(call: suspend () -> BaseResponse<T>, errorMessage: (code:Int,e:String?)->Unit): T? {
 
-        val result:Result<T> = safeApiResult(call,errorMessage)
-        var data:T? = null
-        when(result){
+        try {
 
-            is Result.Success ->
-                data = result.data
-            is Result.Error ->
-                Log.d("ss","")
+            val result  = call.invoke()
+            var data: T? = null
+            return result.data
+        }catch (e:Exception){
+            errorHandle(e,errorMessage)
         }
-
-           return data
+        return null
 
     }
 
@@ -46,4 +51,46 @@ open class BaseRepository {
         return Result.Error(IOException("Error Occurred during getting safe Api result, Custom ERROR - $errorMessage"))
     }
 
+
+    private fun errorHandle(e: Exception, customErrorHandle: (code: Int, msg: String?) -> Unit) {
+        when (e) {
+
+            is HttpException -> {
+                customErrorHandle(e.code(), e.message())
+            }
+            is UnknownHostException -> {
+                defaultError(400, "无法连接到服务器")
+            }
+            is SocketTimeoutException -> {
+                defaultError(400, "链接超时")
+            }
+            is ConnectException -> {
+                defaultError(500, "链接失败")
+            }
+            is SocketException -> {
+                defaultError(500, "链接关闭")
+            }
+            is EOFException -> {
+                defaultError(500, "链接关闭")
+            }
+            is IllegalArgumentException -> {
+                defaultError(400, "参数错误")
+            }
+            is SSLException -> {
+                defaultError(500, "证书错误")
+            }
+            is NullPointerException -> {
+                defaultError(500, "数据为空")
+            }
+            else -> {
+                defaultError(500, "未知错误")
+            }
+        }
+        Log.e("ss", e.toString())
+
+    }
+
+    private val defaultError = fun(_: Int, msg: String?) {
+        Log.e("TAG", msg!!)
+    }
 }

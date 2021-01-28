@@ -21,8 +21,15 @@ class MyViewModel : BaseViewModel() {
     fun fetchArticles(){
 
         viewModelScope.launch {
-            val articles = repository.getArticleList(1)
-            Log.d("ss","===" + articles?.size)
+            val articles = repository.getArticleList(1){
+                    e, s ->
+                Log.d("ss","error".plus(s))
+            }?.let {
+
+                 Log.d("ss","success....")
+
+            }
+
         }
 
     }

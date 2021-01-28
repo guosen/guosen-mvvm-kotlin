@@ -75,4 +75,7 @@ dependencies {
     api 'com.alibaba:arouter-api:1.5.1'
     kapt 'com.alibaba:arouter-compiler:1.5.1'
     api 'com.tencent.tbs.tbssdk:sdk:43939'
+
+    //adapter
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 }
