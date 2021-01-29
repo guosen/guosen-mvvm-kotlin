@@ -20,6 +20,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi', 'armeabi-v7a','x86'
+        }
     }
 
     buildTypes {
@@ -36,7 +40,7 @@ android {
         jvmTarget = '1.8'
     }
 }
-
+def paging_version = "3.0.0-alpha07"
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -50,4 +54,7 @@ dependencies {
     api project(":common")
     //Aroute
     kapt 'com.alibaba:arouter-compiler:1.5.1'
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    testImplementation "androidx.paging:paging-common:$paging_version"
 }

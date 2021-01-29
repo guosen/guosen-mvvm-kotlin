@@ -1,0 +1,15 @@
+
+
+comon ：尽量不依赖业务的组件可以打包aar使用：
+封装图片加载库（策略模式）
+疯转BaseActivity,BaseFragment。。。模版模式
+web：X5内核浏览器封装
+net:协程+Retrofit 统一异常处理
+
+一：组件通信
+ 1.调用组件方法或者获取数据，终决定采用接口+数据结构的方式进行组件间通信，
+对于需要暴露的业务接口和数据结构，放到一个公共的module中。
+ 2.组件跳转Aroute
+ 3.有时像通知刷新类似可以考虑事件总线EventBus
+ //https://mp.weixin.qq.com/s?__biz=MzAxNzMxNzk5OQ==&mid=2649485755&idx=1&sn=379ae85e4b5f29495b5e7a7045f88d10&chksm=83f838bbb48fb1adbad78a3b6a34e9b4016277c981a9cc2ad202a8abe4df04ee80135ab29083&scene=38#wechat_redirect
+

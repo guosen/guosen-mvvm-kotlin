@@ -24,6 +24,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
+
     }
 
     buildTypes {
@@ -78,4 +79,7 @@ dependencies {
 
     //adapter
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //viewpage2
+    api "androidx.viewpager2:viewpager2:1.0.0"
+    api 'cn.yc:YCVideoPlayerLib:2.6.6'
 }

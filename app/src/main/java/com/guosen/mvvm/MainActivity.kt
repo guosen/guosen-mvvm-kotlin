@@ -3,7 +3,9 @@ package com.guosen.mvvm
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import com.alibaba.android.arouter.facade.annotation.Route
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import androidx.paging.PagingData
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guosen.common.base.BaseVMActivity
 import com.guosen.common.event.EventMessage
@@ -37,10 +39,11 @@ class MainActivity() : BaseVMActivity<MyViewModel>() {
     override fun handleEvent(msg: EventMessage) {
         super.handleEvent(msg)
         Log.d("ss",msg.msg)
+         PagingData
     }
 
     fun eventTest(view:View){
-        ARouter.getInstance().build("/common/web")
+        ARouter.getInstance().build("/app/video")
                 .navigation()
 
         EventBus.getDefault().post(EventMessage("11","qq",1,2,null))
