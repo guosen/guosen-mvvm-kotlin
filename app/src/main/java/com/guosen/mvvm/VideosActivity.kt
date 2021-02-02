@@ -9,6 +9,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.guosen.common.widget.wraprv.WrapRecyclerView
 import com.guosen.common.widget.vrecycle.OnPagerListener
 import com.guosen.common.widget.vrecycle.PagerLayoutManager
+import com.guosen.common.widget.wraprv.refresh.DefaultRefreshCreator
+import com.guosen.common.widget.wraprv.refresh.RefreshRecyclerView
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager
 import org.yczbj.ycvideoplayerlib.player.VideoPlayer
 
@@ -27,7 +29,7 @@ class VideosActivity :AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recyclerview)
-        val rv : WrapRecyclerView = findViewById(R.id.recyclerView)
+        val rv : RefreshRecyclerView = findViewById(R.id.recyclerView)
         val layoutManager = PagerLayoutManager(this,OrientationHelper.VERTICAL)
         val list: MutableList<Video> = ArrayList()
         var lvideos = DataProvider.VideoPlayerList
@@ -45,11 +47,12 @@ class VideosActivity :AppCompatActivity() {
         /**
          * 头部布局如果只有外层一层显示不出。
          */
-        var head = LayoutInflater.from(this).inflate(R.layout.header_view,null,false)
-
-        rv.setAdapter(mAdapter)
-        rv.addHeader(head)
+        //var head = LayoutInflater.from(this).inflate(R.layout.header_view,null,false)
         rv.setLayoutManager(layoutManager)
+        rv.addRefreshViewCreator(DefaultRefreshCreator())
+        rv.setAdapter(mAdapter)
+        //rv.addHeader(head)
+
         layoutManager.setOnViewPagerListener(object : OnPagerListener {
             override fun onInitComplete() {
                 println("OnPagerListener---onInitComplete--" + "初始化完成")

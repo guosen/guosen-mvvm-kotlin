@@ -160,10 +160,10 @@ class RefreshRecyclerView : WrapRecyclerView {
      * 添加头部的刷新View
      */
     private fun addRefreshView() {
-        val adapter  = mAdapter
-        if (adapter != null && mRefreshCreator != null) {
+        val adapter  = getAdapter()
+        if (adapter != null) {
             // 添加头部的刷新View
-            val refreshView: View? = mRefreshCreator!!.getRefreshView(context, this)
+            val refreshView: View? = mRefreshCreator?.getRefreshView(context, this)
             if (refreshView != null) {
                 addHeader(refreshView)
                 mRefreshView = refreshView

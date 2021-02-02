@@ -3,8 +3,6 @@ package com.guosen.mvvm
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import androidx.paging.PagingData
 import com.alibaba.android.arouter.launcher.ARouter
 import com.guosen.common.base.BaseVMActivity
@@ -49,4 +47,21 @@ class MainActivity() : BaseVMActivity<MyViewModel>() {
         EventBus.getDefault().post(EventMessage("11","qq",1,2,null))
 
     }
+
+    fun startOOM(view:View){
+        Thread({
+            aCreatOOM()
+        }).start()
+
+    }
+    fun aCreatOOM(){
+
+        val list: MutableList<Video> = ArrayList<Video>()
+        while (true) {
+            var str: Video = Video("11", 1, "", "")
+            list.add(str)
+        }
+
+    }
+
 }

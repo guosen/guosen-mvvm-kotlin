@@ -24,6 +24,8 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'armeabi-v7a','x86'
         }
+
+        flavorDimensions "default"
     }
 
     buildTypes {
@@ -39,7 +41,43 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+
+    //修改生成的apk名字及输出文件夹
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            //新名字
+            def newName
+            //时间戳
+            def timeNow
+            //输出文件夹
+            def outDirectory
+            //是否为Jenkins打包，输出路径不同
+            if ("true".equals(IS_JENKINS)) {
+                //Jenkins打包输出到服务器路径
+                timeNow = BUILD_TIME
+                //BUILD_PATH为服务器输出路径
+                outDirectory = BUILD_PATH
+                //AutoBuildTest-v1.0.1-xiaomi-release.apk
+                newName = 'AutoBuildTest-v' + VERSION_NAME + '-' + variant.name + '.apk'
+            } else {
+                newName = 'AutoBuildTest-v' + VERSION_NAME + '-' + variant.name + '.apk'
+            }
+            outputFileName = newName
+        }
+    }
+
+
+    productFlavors{
+
+        google{}
+        baidu {}
+    }
+
+
+
 }
+
 def paging_version = "3.0.0-alpha07"
 dependencies {
 

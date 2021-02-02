@@ -1,10 +1,15 @@
 
 
 comon ：尽量不依赖业务的组件可以打包aar使用：
-封装图片加载库（策略模式）
-疯转BaseActivity,BaseFragment。。。模版模式
-web：X5内核浏览器封装
-net:协程+Retrofit 统一异常处理
+        封装图片加载库（策略模式）
+        疯转BaseActivity,BaseFragment。。。模版模式
+        web：X5内核浏览器封装
+        net:协程+Retrofit 统一异常处理
+        widget(下拉刷新、上拉加载rv(装饰模式封装)、
+ 业务组件一
+ 业务组件二
+
+ 共用依赖library：
 
 一：组件通信
  1.调用组件方法或者获取数据，终决定采用接口+数据结构的方式进行组件间通信，

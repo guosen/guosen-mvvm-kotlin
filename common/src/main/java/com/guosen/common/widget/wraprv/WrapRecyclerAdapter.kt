@@ -37,6 +37,7 @@ class WrapRecyclerAdapter : RecyclerView.Adapter<BaseViewHolder> {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        Log.d("ss","onCreateViewHolder")
         if (heads.containsKey(viewType)) {
             return createHeaderAndFooterViewHolder(heads.get(viewType))
         } else if (foots.indexOfKey(viewType) >= 0) {
@@ -47,18 +48,18 @@ class WrapRecyclerAdapter : RecyclerView.Adapter<BaseViewHolder> {
     }
 
     private fun createHeaderAndFooterViewHolder(view: View?): BaseViewHolder {
-
+        Log.d("ss","createHeaderAndFooterViewHolder")
         return BaseViewHolder(view!!)
 
     }
 
     override fun getItemCount(): Int {
-
+        Log.d("ss","getItemCount")
         return mAdapter.itemCount + heads?.size() + foots?.size()
     }
 
     override fun getItemViewType(position: Int): Int {
-
+        Log.d("ss","getItemViewType")
         //positon->type
         //1.头部
         var numHeads = heads.size()
@@ -80,7 +81,7 @@ class WrapRecyclerAdapter : RecyclerView.Adapter<BaseViewHolder> {
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-
+        Log.d("ss","onBindViewHolder")
         var numHeads = heads.size()
         var adPositiopn = position - numHeads
         if (numHeads - 1 >= adPositiopn) return
@@ -117,5 +118,9 @@ class WrapRecyclerAdapter : RecyclerView.Adapter<BaseViewHolder> {
             foots?.removeAt(foots?.indexOfValue(view)!!)
         }
         notifyDataSetChanged()
+    }
+
+    fun getDataAdapter():RecyclerView.Adapter<BaseViewHolder>{
+        return mAdapter
     }
 }

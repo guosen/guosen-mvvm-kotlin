@@ -18,6 +18,7 @@
 
     <ImageView
         android:id="@+id/iv"
+        android:onClick="startOOM"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintLeft_toLeftOf="parent"
