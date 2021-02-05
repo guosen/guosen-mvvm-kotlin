@@ -82,4 +82,8 @@ dependencies {
     //viewpage2
     api "androidx.viewpager2:viewpager2:1.0.0"
     api 'cn.yc:YCVideoPlayerLib:2.6.6'
+
+    api "androidx.paging:paging-runtime:3.0.0-alpha07"
+
+
 }
