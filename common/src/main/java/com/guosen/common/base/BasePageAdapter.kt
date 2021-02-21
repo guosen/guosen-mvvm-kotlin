@@ -21,9 +21,10 @@ class BasePageAdapter : FragmentPagerAdapter {
         return mFragments[position]
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-       return view == `object`
-    }
+//    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+//       return view == `object`
+    //显示不出来
+//    }
     override fun getCount(): Int {
         return if (mFragments == null) 0 else mFragments.size
     }
