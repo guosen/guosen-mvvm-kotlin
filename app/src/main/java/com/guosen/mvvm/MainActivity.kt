@@ -9,11 +9,16 @@ import com.guosen.common.base.BaseVMActivity
 import com.guosen.common.event.EventMessage
 import com.guosen.common.imageloader.ImageLoaderHelper
 import com.guosen.common.imageloader.ImageOptions
+import com.guosen.nativecrash.monitor.CrashHandlerListener
+import com.guosen.nativecrash.monitor.NativeCrashMonitor
 import org.greenrobot.eventbus.EventBus
 
 
 class MainActivity() : BaseVMActivity<MyViewModel>() {
 
+    init {
+
+    }
 
     override fun initVM(): MyViewModel {
         return MyViewModel()
@@ -26,6 +31,7 @@ class MainActivity() : BaseVMActivity<MyViewModel>() {
 
     override fun initData() {
         mViewModel.fetchArticles()
+        NativeCrashMonitor().init(object : CrashHandlerListener {})
 
 
     }
@@ -52,6 +58,7 @@ class MainActivity() : BaseVMActivity<MyViewModel>() {
         Thread({
             aCreatOOM()
         }).start()
+        NativeCrashMonitor.nativeCrash()
 
     }
     fun aCreatOOM(){
